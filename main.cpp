@@ -55,14 +55,14 @@ class Dealer
 {
 	private:
 		int bettingMoney;
-		int PlayerInProgress;
+		int playerInProgress;
 		int turn;
 		Card *card[2];
 		Player *player[2];
 	public:
 		Dealer() {
 			bettingMoney = 0;
-			PlayerInProgress=0;
+			playerInProgress=0;
 			turn = 0;
 			card[0] = new Card(CardColor::RED);
 			card[1] = new Card(CardColor::BLACK);
@@ -88,30 +88,77 @@ class Dealer
 			int rightPlayerBettingMoney = 0;
 			int remainingMoney = 0;
 			bool giveUp = false;
-			if (PlayerInProgress == PlayerPosition::LEFTPLAYER) {
-				leftPlayerBettingMoney += player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer();
-				if (leftPlayerBettingMoney == 0) {
-					giveUp = true;
-					checkWinner(giveUp);
+			
+			do {
+				int moneyBuffer = 0;
+				if (playerInProgress == PlayerPosition::LEFTPLAYER) {
+					
+					moneyBuffer = leftPlayerBettingMoney;
+
+					leftPlayerBettingMoney += player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(remainingMoney);
+					if (leftPlayerBettingMoney == moneyBuffer) {
+						giveUp = true;
+						break;
+					}
+					playerInProgress = PlayerPosition::RIGHTPLAYER;
+					remainingMoney = leftPlayerBettingMoney - rightPlayerBettingMoney;
+
 				}
 				else {
-					
+					moneyBuffer = rightPlayerBettingMoney;
+					rightPlayerBettingMoney += player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer(remainingMoney);
+					if (rightPlayerBettingMoney == rightPlayerBettingMoney) {
+						giveUp = true;
+						break;
+					}
+					playerInProgress == PlayerPosition::LEFTPLAYER;
+					remainingMoney = leftPlayerBettingMoney - rightPlayerBettingMoney;
+				}
+
+			} while (leftPlayerBettingMoney != rightPlayerBettingMoney);
+			
+
+			if (giveUp == true) {
+				if (playerInProgress == PlayerPosition::LEFTPLAYER) {
+					bettingMoney += leftPlayerBettingMoney * 2;
+				}
+				else {
+					bettingMoney += rightPlayerBettingMoney * 2;
+				}
+				checkWinner(giveUp);
+			}
+			else {
+				bettingMoney += leftPlayerBettingMoney * 2;
+				checkWinner(giveUp);
+			}
+			return;
+		}
+		void checkWinner(bool giveUp) {
+			if (giveUp == true) {
+				if (playerInProgress == PlayerPosition::LEFTPLAYER) {
+					player[1]->receiveVictoryMoney(bettingMoney);
+					bettingMoney = 0;
+				}
+				else {
+					player[0]->receiveVictoryMoney(bettingMoney);
+					bettingMoney = 0;
 				}
 			}
 			else {
-				rightPlayerBettingMoney = player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer();
-				if (leftPlayerBettingMoney == 0) {
-					giveUp = true;
-					checkWinner(giveUp);
+				if (player[0]->getPlayerCardNumber() > player[1]->getPlayerCardNumber()) {
+					player[1]->receiveVictoryMoney(bettingMoney);
+					bettingMoney = 0;
+					playerInProgress = PlayerPosition::RIGHTPLAYER;
+				}
+				else if (player[0]->getPlayerCardNumber() < player[1]->getPlayerCardNumber()) {
+					player[0]->receiveVictoryMoney(bettingMoney);
+					bettingMoney = 0;
+					playerInProgress = PlayerPosition::LEFTPLAYER;
 				}
 				else {
-
+//드로우
 				}
 			}
-
-		}
-		void checkWinner(bool giveUp) {
-
 		}
 };
 class Player
@@ -140,12 +187,16 @@ class Player
 			return BASIC_BET;
 		}
 		
-		int giveBettingMoneyToDealer() {
+		int giveBettingMoneyToDealer(int remainingMoney) {
 			int bettingMoney = 0;
 			cout << "배팅할 금액을 입력하시오: ";
 			//try catch 입력에 대하여
 			cin >> bettingMoney;
 			//if else
+		}
+
+		void receiveVictoryMoney(int victoryMoney) {
+			playerMoney += victoryMoney;
 		}
 
 };
