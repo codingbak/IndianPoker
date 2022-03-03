@@ -21,9 +21,15 @@
     <ClCompile Include="consoleControl.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="consoleBackGround.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="consoleControl.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="consoleBackGround.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

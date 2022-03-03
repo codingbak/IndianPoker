@@ -1,6 +1,8 @@
 #include "consoleControl.h"
 #include <windows.h>
-
+#include <conio.h>
+#include <cstdlib>
+#include <ctime>
 void gotoxy(int x, int y) {
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD pos;
@@ -15,3 +17,44 @@ void gotoxy(Pointer point) {
 	pos.Y = point.y;
 	SetConsoleCursorPosition(consoleHandle, pos);
 }
+void textColor(int foreground, int background)
+{
+	int color = foreground + background * 16;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+void consoleSize() {
+	system("mode con cols=90 lines=30");
+}
+void consoleName() {
+	SetConsoleTitle("Indian Poker");
+}
+
+CursorControl::CursorControl(Pointer nowPointer) : pointer(nowPointer) {
+}
+
+Pointer CursorControl::cursorMove() {
+	if (_kbhit()) {
+		int pressedKey = _getch();
+		switch (pressedKey) {
+		case UP:
+			pointer.y -= 1;
+			system("cls");
+			break;
+		case DOWN:
+			pointer.y += 1;
+			system("cls");
+			break;
+		}
+	}
+	return pointer;
+}
+bool CursorControl::cursorClick() {
+	if (_kbhit()) {
+		int pressedKey = _getch();
+		if (pressedKey == ENTER) {
+			return true;
+		}
+	}
+	return false;
+}
+
