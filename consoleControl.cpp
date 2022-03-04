@@ -1,8 +1,5 @@
 #include "consoleControl.h"
-#include <windows.h>
-#include <conio.h>
-#include <cstdlib>
-#include <ctime>
+
 void gotoxy(int x, int y) {
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD pos;
@@ -23,7 +20,7 @@ void textColor(int foreground, int background)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 void consoleSize() {
-	system("mode con cols=90 lines=30");
+	system("mode con cols=130 lines=40");
 }
 void consoleName() {
 	SetConsoleTitle("Indian Poker");

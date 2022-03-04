@@ -1,7 +1,9 @@
+#pragma once
 #include <windows.h>
 #include <conio.h>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 
 #define UP 72
 #define DOWN 80
