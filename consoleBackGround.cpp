@@ -121,188 +121,242 @@ void indianPokerLogo() {
 	textColor(WHITE, BLACK);
 }
 void gamePageCardUI(int cardNumber, int cardColor) {
+	
+	int cardPointX = 0;
 
-	textColor(RED, WHITE);
-	gotoxy(10, 5);
-	cout << "              " << endl;
-	gotoxy(10, 6);
-	cout << "              " << endl;
-	gotoxy(10, 7);
-	cout << "              " << endl;
-	gotoxy(10, 8);
-	cout << "        ■    " << endl;
-	gotoxy(10, 9);
-	cout << "    ■■■    " << endl;
-	gotoxy(10, 10);
-	cout << "        ■    " << endl;
-	gotoxy(10, 11);
-	cout << "        ■    " << endl;
-	gotoxy(10, 12);
-	cout << "        ■    " << endl;
-	gotoxy(10, 13);
-	cout << "        ■    " << endl;
-	gotoxy(10, 14);
-	cout << "    ■■■■■" << endl;
-
-
-	textColor(BLACK, WHITE);
-	gotoxy(100, 5);
-	cout << "              " << endl;
-	gotoxy(100, 6);
-	cout << "              " << endl;
-	gotoxy(100, 7);
-	cout << "              " << endl;
-	gotoxy(100, 8);
-	cout << "      ■■■  " << endl;
-	gotoxy(100, 9);
-	cout << "    ■      ■" << endl;
-	gotoxy(100, 10);
-	cout << "          ■  " << endl;
-	gotoxy(100, 11);
-	cout << "        ■    " << endl;
-	gotoxy(100, 12);
-	cout << "      ■      " << endl;
-	gotoxy(100, 13);
-	cout << "    ■        " << endl;
-	gotoxy(100, 14);
-	cout << "    ■■■■■" << endl;
-	/*
-	gotoxy(asdf, 5);
-	cout << "              " << endl;
-	gotoxy(asdf, 6);
-	cout << "              " << endl;
-	gotoxy(asdf, 7);
-	cout << "              " << endl;
-	gotoxy(asdf, 8);
-	cout << "      ■■■  " << endl;
-	gotoxy(asdf, 9);
-	cout << "    ■      ■" << endl;
-	gotoxy(asdf, 10);
-	cout << "            ■" << endl;
-	gotoxy(asdf, 11);
-	cout << "        ■■  " << endl;
-	gotoxy(asdf, 12);
-	cout << "            ■" << endl;
-	gotoxy(asdf, 13);
-	cout << "    ■      ■" << endl;
-	gotoxy(asdf, 14);
-	cout << "      ■■■  " << endl;
-
-	gotoxy(asdf, 5);
-	cout << "              " << endl;
-	gotoxy(asdf, 6);
-	cout << "              " << endl;
-	gotoxy(asdf, 7);
-	cout << "              " << endl;
-	gotoxy(asdf, 8);
-	cout << "    ■        " << endl;
-	gotoxy(asdf, 9);
-	cout << "    ■        " << endl;
-	gotoxy(asdf, 10);
-	cout << "    ■  ■    " << endl;
-	gotoxy(asdf, 11);
-	cout << "    ■  ■    " << endl;
-	gotoxy(asdf, 12);
-	cout << "    ■■■■■" << endl;
-	gotoxy(asdf, 13);
-	cout << "        ■    " << endl;
-	gotoxy(asdf, 14);
-	cout << "        ■    " << endl;
-
-	gotoxy(asdf, 5);
-	cout << "              " << endl;
-	gotoxy(asdf, 6);
-	cout << "              " << endl;
-	gotoxy(asdf, 7);
-	cout << "              " << endl;
-	gotoxy(asdf, 8);
-	cout << "    ■■■■■" << endl;
-	gotoxy(asdf, 9);
-	cout << "    ■        " << endl;
-	gotoxy(asdf, 10);
-	cout << "    ■        " << endl;
-	gotoxy(asdf, 11);
-	cout << "    ■■■■  " << endl;
-	gotoxy(asdf, 12);
-	cout << "            ■" << endl;
-	gotoxy(asdf, 13);
-	cout << "            ■" << endl;
-	gotoxy(asdf, 14);
-	cout << "    ■■■■  " << endl;
-
-	gotoxy(asdf, 5);
-	cout << "              " << endl;
-	gotoxy(asdf, 6);
-	cout << "              " << endl;
-	gotoxy(asdf, 7);
-	cout << "              " << endl;
-	gotoxy(asdf, 8);
-	cout << "      ■■■  " << endl;
-	gotoxy(asdf, 9);
-	cout << "    ■      ■" << endl;
-	gotoxy(asdf, 10);
-	cout << "    ■        " << endl;
-	gotoxy(asdf, 11);
-	cout << "    ■■■■  " << endl;
-	gotoxy(asdf, 12);
-	cout << "    ■      ■" << endl;
-	gotoxy(asdf, 13);
-	cout << "    ■      ■" << endl;
-	gotoxy(asdf, 14);
-	cout << "      ■■■  " << endl;
-
-		gotoxy(asdf, 5);
-	cout << "              " << endl;
-	gotoxy(asdf, 6);
-	cout << "              " << endl;
-	gotoxy(asdf, 7);
-	cout << "              " << endl;
-	gotoxy(asdf, 8);
-	cout << "    ■■■■■" << endl;
-	gotoxy(asdf, 9);
-	cout << "            ■" << endl;
-	gotoxy(asdf, 10);
-	cout << "          ■  " << endl;
-	gotoxy(asdf, 11);
-	cout << "        ■    " << endl;
-	gotoxy(asdf, 12);
-	cout << "        ■    " << endl;
-	gotoxy(asdf, 13);
-	cout << "        ■    " << endl;
-	gotoxy(asdf, 14);
-	cout << "        ■    " << endl;
-
-	gotoxy(asdf, 5);
-	cout << "              " << endl;
-	gotoxy(asdf, 6);
-	cout << "              " << endl;
-	gotoxy(asdf, 7);
-	cout << "              " << endl;
-	gotoxy(asdf, 8);
-	cout << "      ■■■  " << endl;
-	gotoxy(asdf, 9);
-	cout << "    ■      ■" << endl;
-	gotoxy(asdf, 10);
-	cout << "    ■        " << endl;
-	gotoxy(asdf, 11);
-	cout << "    ■■■■  " << endl;
-	gotoxy(asdf, 12);
-	cout << "    ■      ■" << endl;
-	gotoxy(asdf, 13);
-	cout << "    ■      ■" << endl;
-	gotoxy(asdf, 14);
-	cout << "      ■■■  " << endl;
-	*/
 	if (cardColor == RED) {
-		textColor(BLACK, RED);
-		gotoxy(10, 16);
-		cout << cardNumber<<endl;
+		textColor(RED, WHITE);
+		cardPointX = 10;
 	}
 	else {
 		textColor(BLACK, WHITE);
-		gotoxy(100, 16);
-		cout << cardNumber<<endl;
+		cardPointX = 100;
 	}
+
+	switch (cardNumber)
+	{
+	case 0 : 
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■■■    " << endl;
+		gotoxy(cardPointX, 10);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 11);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 13);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 14);
+		cout << "    ■■■■■" << endl;
+		break;
+	case 1:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "      ■■■  " << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 10);
+		cout << "          ■  " << endl;
+		gotoxy(cardPointX, 11);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "      ■      " << endl;
+		gotoxy(cardPointX, 13);
+		cout << "    ■        " << endl;
+		gotoxy(cardPointX, 14);
+		cout << "    ■■■■■" << endl;
+		break;
+	case 2:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "      ■■■  " << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 10);
+		cout << "            ■" << endl;
+		gotoxy(cardPointX, 11);
+		cout << "        ■■  " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "            ■" << endl;
+		gotoxy(cardPointX, 13);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 14);
+		cout << "      ■■■  " << endl;
+		break;
+	case 3:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "    ■        " << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■        " << endl;
+		gotoxy(cardPointX, 10);
+		cout << "    ■  ■    " << endl;
+		gotoxy(cardPointX, 11);
+		cout << "    ■  ■    " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "    ■■■■■" << endl;
+		gotoxy(cardPointX, 13);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 14);
+		cout << "        ■    " << endl;
+		break;
+	case 4:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "    ■■■■■" << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■        " << endl;
+		gotoxy(cardPointX, 10);
+		cout << "    ■        " << endl;
+		gotoxy(cardPointX, 11);
+		cout << "    ■■■■  " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "            ■" << endl;
+		gotoxy(cardPointX, 13);
+		cout << "            ■" << endl;
+		gotoxy(cardPointX, 14);
+		cout << "    ■■■■  " << endl;
+		break;
+	case 5:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "      ■■■  " << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 10);
+		cout << "    ■        " << endl;
+		gotoxy(cardPointX, 11);
+		cout << "    ■■■■  " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 13);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 14);
+		cout << "      ■■■  " << endl;
+		break;
+	case 6:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "    ■■■■■" << endl;
+		gotoxy(cardPointX, 9);
+		cout << "            ■" << endl;
+		gotoxy(cardPointX, 10);
+		cout << "          ■  " << endl;
+		gotoxy(cardPointX, 11);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 13);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 14);
+		cout << "        ■    " << endl;
+		break;
+	case 7:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "      ■■■  " << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 10);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 11);
+		cout << "      ■■■  " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 13);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 14);
+		cout << "      ■■■  " << endl;
+		break;
+	case 8:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "      ■■■  " << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 10);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 11);
+		cout << "      ■■■■" << endl;
+		gotoxy(cardPointX, 12);
+		cout << "            ■" << endl;
+		gotoxy(cardPointX, 13);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 14);
+		cout << "      ■■■  " << endl;
+		break;
+	case 9:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "    ■■■■■" << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 9);
+		cout << "      ■  ■  " << endl;
+		gotoxy(cardPointX, 10);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 11);
+		cout << "      ■  ■  " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 13);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 14);
+		cout << "    ■■■■■" << endl;
+		break;
+	}
+
 	textColor(WHITE, BLACK);
 }
 
@@ -312,9 +366,9 @@ void gamePageBettingUI() {
 	gotoxy(58, 11);
 	cout << "CALL 금액";
 }
-void gamePagePlayerUI() {
+void gamePagePlayerUI(std::string namePlayerA, std::string namePlayerB) {
 	gotoxy(10,17);
-	cout << "Player A";
+	cout << namePlayerA<< " Player";
 	gotoxy(10, 21);
 	cout << "현재 자본";
 	gotoxy(25, 9);
@@ -322,7 +376,7 @@ void gamePagePlayerUI() {
 	gotoxy(10, 24);
 	cout << "베팅금을 입력하시오";
 	gotoxy(100, 17);
-	cout << "Player B";
+	cout << namePlayerB <<" Player";
 	gotoxy(100, 21);
 	cout << "현재 자본";
 	gotoxy(85, 9);
@@ -343,4 +397,14 @@ void gamePagePlayerInfoInsertUI(GamePageInfo gamePageInfo) {
 	cout << gamePageInfo.rightPlayerMoney;
 	gotoxy(86, 10);
 	cout << gamePageInfo.rightPlayerBettingMoney;
+}
+
+void gamePageGameTipUI() {
+	gotoxy(58, 30);
+	cout << "★게임 꿀팁★";
+	gotoxy(38, 31);
+	cout << "※ 다이를 외치는 방법은 베팅 금액을 0을 입력하면 됩니다.";
+	gotoxy(38, 32);
+	cout << "※ 10을 들고 다이를 외치면 패널티 1000000을 잃게 됩니다.";
+
 }

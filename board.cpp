@@ -1,9 +1,5 @@
 #include "board.h"
 
-#define BLACK 0
-#define RED 4
-#define WHITE 15
-
 Board::Board() {
 	pageNumber = Page::MENU;
 }
@@ -76,18 +72,23 @@ void Board::openWriteNamePage() {
 	return;
 }
 void Board::openStartGamePage() {
-	dealer.giveCardToPlayer();
-	CurrentPlayerCardSet currentCardSet;
-	currentCardSet = dealer.getCurrentCardNumber();
-	gamePageCardUI(currentCardSet.leftPlayerCard, RED);
-	gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
-	gamePageBettingUI();
-	gamePagePlayerUI();
-	dealer.receiveToBettingMoney();
-	dealer.BettingStart();
+	bool winnerCheck = true;
+	for (int i = 0; i < 10; i++) { 
+		dealer.giveCardToPlayer();
+		dealer.receiveToBettingMoney();
+		dealer.BettingStart();
+		winnerCheck = dealer.turnCheck();
+		if (winnerCheck == false) {
+			break;
+		}
+	}
+	pageNumber = Page::END_GAME;
+	system("cls");
+	this -> startGame();
 	return;
 }
 void Board::openEndGamePage() {
+	cout << dealer.winnerSelect();
 	return;
 }
 

@@ -21,9 +21,10 @@ public:
 	int getPlayerCardNumber();
 
 	int giveBasicBettingMoneyToDealer();
-	int giveBettingMoneyToDealer(int remainingMoney);
+	int giveBettingMoneyToDealer(int remainingMoney,int enemyPlayerMoney);
 	int getPlayerMoney();
 	void receiveVictoryMoney(int victoryMoney);
-
+	int receiveDrawMoney();
+	int givePenaltyMoney();
 };
 

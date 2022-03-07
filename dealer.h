@@ -32,5 +32,6 @@ public:
 	void BettingStart();
 	void checkWinner(bool giveUp);
 	bool turnCheck();
+	string winnerSelect();
 };
 

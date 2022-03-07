@@ -1,7 +1,7 @@
 #include "player.h"
 
 #define BASIC_BET 100000
-
+#define PENALTY_BET 1000000
 
 Player::Player() {
 
@@ -31,11 +31,25 @@ int Player::giveBasicBettingMoneyToDealer() {
 		return BASIC_BET;
 	}
 
-int Player::giveBettingMoneyToDealer(int remainingMoney) {
+int Player::giveBettingMoneyToDealer(int remainingMoney, int enemyPlayerMoney) {
 		int bettingMoney = 0;
-		//try catch 입력에 대하여
+		int maxBettingMoney = enemyPlayerMoney + remainingMoney;
+		int minBettingMoney = remainingMoney;
 		cin >> bettingMoney;
-		//if else
+		while (1) {
+			if (minBettingMoney > bettingMoney) {
+				cout << "call보다 적은 금액을 입력하셨습니다.";
+				cin >> bettingMoney;
+			}
+			else if (maxBettingMoney < bettingMoney) {
+				cout << "너무 높은 베팅을 입력하셨습니다.";
+				cin >> bettingMoney;
+			}
+			else {
+				break;
+			}
+		}
+		playerMoney -= bettingMoney;
 		return bettingMoney;
 	}
 
@@ -43,3 +57,13 @@ int Player::giveBettingMoneyToDealer(int remainingMoney) {
 void Player::receiveVictoryMoney(int victoryMoney) {
 		playerMoney += victoryMoney;
 	}
+
+int Player::receiveDrawMoney() {
+	playerMoney += BASIC_BET;
+	return BASIC_BET;
+}
+
+int Player::givePenaltyMoney() {
+	playerMoney -= PENALTY_BET;
+	return PENALTY_BET;
+}
