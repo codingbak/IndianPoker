@@ -62,7 +62,10 @@ int Player::receiveDrawMoney() {
 	playerMoney += BASIC_BET;
 	return BASIC_BET;
 }
-
+/// <summary>
+/// ÀÜµð È®ÀÎ
+/// </summary>
+/// <returns></returns>
 int Player::givePenaltyMoney() {
 	playerMoney -= PENALTY_BET;
 	return PENALTY_BET;
