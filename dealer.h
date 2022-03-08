@@ -33,5 +33,6 @@ public:
 	void checkWinner(bool giveUp);
 	bool turnCheck();
 	string winnerSelect();
+	void engPageUI();
 };
 

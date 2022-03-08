@@ -144,7 +144,7 @@ void Dealer::checkWinner(bool giveUp) {
 	}
 }
 bool Dealer::turnCheck() {
-	if ((player[0]->getPlayerMoney() <= 0)||(player[1]->getPlayerMoney() <= 0)) {
+	if ((player[0]->getPlayerMoney() <= 100000)||(player[1]->getPlayerMoney() <= 100000)) {
 		return false;
 	}
 	else {
@@ -163,4 +163,26 @@ string Dealer::winnerSelect() {
 	else {
 		return "";
 	}
+}
+
+void Dealer::engPageUI() {
+
+	int leftPlayerBettingMoney = 0;
+	int rightPlayerBettingMoney = 0;
+	int remainingMoney = 0;
+
+	GamePageInfo gamePageInfo;
+	gamePageInfo.leftPlayerMoney = player[0]->getPlayerMoney();
+	gamePageInfo.rightPlayerMoney = player[1]->getPlayerMoney();
+	gamePageInfo.leftPlayerBettingMoney = leftPlayerBettingMoney;
+	gamePageInfo.rightPlayerBettingMoney = rightPlayerBettingMoney;
+	gamePageInfo.currentAllBettingMoney = bettingMoney;
+	gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+	
+	gamePageCardUI(9, RED);
+	gamePageCardUI(9, BLACK);
+
+	gamePageBettingUI();
+	gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
+	gamePagePlayerInfoInsertUI(gamePageInfo);
 }

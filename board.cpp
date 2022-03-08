@@ -88,7 +88,10 @@ void Board::openStartGamePage() {
 	return;
 }
 void Board::openEndGamePage() {
-	cout << dealer.winnerSelect();
+
+	dealer.engPageUI();
+	endPageWinnerUI(dealer.winnerSelect());
+
 	return;
 }
 

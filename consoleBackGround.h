@@ -20,3 +20,4 @@ void gamePageBettingUI();
 void gamePagePlayerUI(std::string namePlayerA, std::string namePlayerB);
 void gamePagePlayerInfoInsertUI(GamePageInfo gamePageInfo);
 void gamePageGameTipUI();
+void endPageWinnerUI(std::string winnerPlayer);

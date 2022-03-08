@@ -408,3 +408,21 @@ void gamePageGameTipUI() {
 	cout << "※ 10을 들고 다이를 외치면 패널티 1000000을 잃게 됩니다.";
 
 }
+
+void endPageWinnerUI(std::string winnerPlayer)
+{
+	for(int i=0; i<100; i++){
+	gotoxy(45, 30);
+	cout << "★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆";
+	gotoxy(53, 31);
+	cout << winnerPlayer << "플레이어님 축하드립니다 :)";
+	gotoxy(45, 32);
+	cout << "★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆";
+	Sleep(50);
+	gotoxy(45, 30);
+	cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★";
+	gotoxy(45, 32);
+	cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★";
+	Sleep(50);
+	}
+}
