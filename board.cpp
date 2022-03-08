@@ -1,26 +1,36 @@
 #include "board.h"
 
+
+
 Board::Board() {
 	pageNumber = Page::MENU;
 }
+
+
 void Board::startGame() {
-	switch (pageNumber)
-	{
+	switch (pageNumber) {
+
 	case Page::MENU:
 		this->openMenuPage();
 		break;
+
 	case Page::WRITE_NAME:
 		this->openWriteNamePage();
 		break;
+
 	case Page::START_GAME:
 		this->openStartGamePage();
 		break;
+
 	case Page::END_GAME:
 		this->openEndGamePage();
 		break;
 	}
 }
+
+
 void Board::openMenuPage() {
+
 	indianPokerLogo();
 	menuPageUI();
 
@@ -50,7 +60,10 @@ void Board::openMenuPage() {
 	}
 	return;
 }
+
+
 void Board::openWriteNamePage() {
+
 	indianPokerLogo();
 	namePageUI();
 
@@ -71,8 +84,11 @@ void Board::openWriteNamePage() {
 	this->startGame();
 	return;
 }
+
+
 void Board::openStartGamePage() {
 	bool winnerCheck = true;
+
 	for (int i = 0; i < 10; i++) { 
 		dealer.giveCardToPlayer();
 		dealer.receiveToBettingMoney();
@@ -82,6 +98,7 @@ void Board::openStartGamePage() {
 			break;
 		}
 	}
+
 	pageNumber = Page::END_GAME;
 	system("cls");
 	this -> startGame();

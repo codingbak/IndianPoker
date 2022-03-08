@@ -5,16 +5,20 @@
 #include <algorithm>
 #include <Windows.h>
 
+
 enum CardColor {
 	RED = 4,
 	BLACK = 0
 };
 
-class Card
-{
+
+
+class Card {
+
 private:
 	int cardNumber[10];
 	CardColor cardColor;
+
 
 public:
 	Card(CardColor color);

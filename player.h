@@ -2,14 +2,18 @@
 #include <string>
 #include <iostream>
 
+
 using namespace std;
 
-class Player
-{
+
+
+class Player {
+
 private:
 	string playerName;
 	int playerMoney;
 	int playerCardNumber;
+
 
 public:
 	Player();

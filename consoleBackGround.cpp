@@ -1,19 +1,24 @@
 #include "consoleBackGround.h"
 
-
 #define BLACK 0
 #define RED 4
 #define WHITE 15
 
 using namespace std;
 
+
+
 void menuPageUI() {
+
 	gotoxy(50, 22);
 	cout << "Game Start";
 	gotoxy(50, 23);
 	cout << "Game End";
 }
+
+
 void namePageUI() {
+
 	gotoxy(40, 22);
 	cout << "Player 1 이름을 입력하시오 : ";
 	gotoxy(40, 24);
@@ -22,7 +27,9 @@ void namePageUI() {
 
 
 void indianPokerLogo() {
+
 	textColor(RED, WHITE);
+
 	gotoxy(15, 13);
 	cout << "■■■■■" << endl;
 	gotoxy(15, 14);
@@ -39,6 +46,7 @@ void indianPokerLogo() {
 	cout << "■■■■■" << endl;
 
 	textColor(BLACK, WHITE);
+
 	gotoxy(30, 13);
 	cout << "■■    ■" << endl;
 	gotoxy(30, 14);
@@ -55,6 +63,7 @@ void indianPokerLogo() {
 	cout << "■      ■" << endl;
 
 	textColor(RED, WHITE);
+
 	gotoxy(45, 13);
 	cout << "■■      " << endl;
 	gotoxy(45, 14);
@@ -71,6 +80,7 @@ void indianPokerLogo() {
 	cout << "■■      " << endl;
 
 	textColor(BLACK, WHITE);
+
 	gotoxy(60, 13);
 	cout << "■■■■■" << endl;
 	gotoxy(60, 14);
@@ -87,6 +97,7 @@ void indianPokerLogo() {
 	cout << "■■■■■" << endl;
 
 	textColor(RED, WHITE);
+
 	gotoxy(75, 13);
 	cout << "■■■■■" << endl;
 	gotoxy(75, 14);
@@ -103,6 +114,7 @@ void indianPokerLogo() {
 	cout << "■      ■" << endl;
 
 	textColor(BLACK, WHITE);
+
 	gotoxy(90, 13);
 	cout << "■■    ■" << endl;
 	gotoxy(90, 14);
@@ -120,6 +132,8 @@ void indianPokerLogo() {
 	
 	textColor(WHITE, BLACK);
 }
+
+
 void gamePageCardUI(int cardNumber, int cardColor) {
 	
 	int cardPointX = 0;
@@ -128,6 +142,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		textColor(RED, WHITE);
 		cardPointX = 10;
 	}
+
 	else {
 		textColor(BLACK, WHITE);
 		cardPointX = 100;
@@ -157,6 +172,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "    ■■■■■" << endl;
 		break;
+
 	case 1:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -179,6 +195,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "    ■■■■■" << endl;
 		break;
+
 	case 2:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -201,6 +218,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "      ■■■  " << endl;
 		break;
+
 	case 3:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -223,6 +241,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "        ■    " << endl;
 		break;
+
 	case 4:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -245,6 +264,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "    ■■■■  " << endl;
 		break;
+
 	case 5:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -267,6 +287,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "      ■■■  " << endl;
 		break;
+
 	case 6:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -289,6 +310,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "        ■    " << endl;
 		break;
+
 	case 7:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -311,6 +333,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "      ■■■  " << endl;
 		break;
+
 	case 8:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -333,6 +356,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "      ■■■  " << endl;
 		break;
+
 	case 9:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
@@ -360,13 +384,18 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 	textColor(WHITE, BLACK);
 }
 
+
 void gamePageBettingUI() {
+
 	gotoxy(58, 7);
 	cout << "베팅 금액";
 	gotoxy(58, 11);
 	cout << "CALL 금액";
 }
+
+
 void gamePagePlayerUI(std::string namePlayerA, std::string namePlayerB) {
+
 	gotoxy(10,17);
 	cout << namePlayerA<< " Player";
 	gotoxy(10, 21);
@@ -376,6 +405,7 @@ void gamePagePlayerUI(std::string namePlayerA, std::string namePlayerB) {
 	gotoxy(10, 24);
 	cout << "베팅금을 입력하시오";
 	gotoxy(100, 17);
+
 	cout << namePlayerB <<" Player";
 	gotoxy(100, 21);
 	cout << "현재 자본";
@@ -384,7 +414,10 @@ void gamePagePlayerUI(std::string namePlayerA, std::string namePlayerB) {
 	gotoxy(100, 24);
 	cout << "베팅금을 입력하시오";
 }
+
+
 void gamePagePlayerInfoInsertUI(GamePageInfo gamePageInfo) {
+
 	gotoxy(59, 8);
 	cout << gamePageInfo.currentAllBettingMoney;
 	gotoxy(59, 12);
@@ -399,7 +432,9 @@ void gamePagePlayerInfoInsertUI(GamePageInfo gamePageInfo) {
 	cout << gamePageInfo.rightPlayerBettingMoney;
 }
 
+
 void gamePageGameTipUI() {
+
 	gotoxy(58, 30);
 	cout << "★게임 꿀팁★";
 	gotoxy(38, 31);
@@ -409,20 +444,21 @@ void gamePageGameTipUI() {
 
 }
 
+
 void endPageWinnerUI(std::string winnerPlayer)
 {
 	for(int i=0; i<100; i++){
-	gotoxy(45, 30);
-	cout << "★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆";
-	gotoxy(53, 31);
-	cout << winnerPlayer << "플레이어님 축하드립니다 :)";
-	gotoxy(45, 32);
-	cout << "★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆";
-	Sleep(50);
-	gotoxy(45, 30);
-	cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★";
-	gotoxy(45, 32);
-	cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★";
-	Sleep(50);
+		gotoxy(45, 30);
+		cout << "★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆";
+		gotoxy(53, 31);
+		cout << winnerPlayer << "플레이어님 축하드립니다 :)";
+		gotoxy(45, 32);
+		cout << "★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆";
+		Sleep(50);
+		gotoxy(45, 30);
+		cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★";
+		gotoxy(45, 32);
+		cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★";
+		Sleep(50);
 	}
 }

@@ -3,7 +3,11 @@
 #include <iostream>
 #include <string>
 
+
+
 struct GamePageInfo {
+
+
 	int leftPlayerMoney;
 	int rightPlayerMoney;
 	int leftPlayerBettingMoney;
@@ -11,6 +15,7 @@ struct GamePageInfo {
 	int currentAllBettingMoney;
 	int currentCallBettingMoney;
 };
+
 
 void indianPokerLogo();
 void menuPageUI();
