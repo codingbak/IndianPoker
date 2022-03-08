@@ -12,5 +12,5 @@ c++, tcp/ip 교육을 위한 indian Poker 게임
 * 턴제로 진행된다
 * tcp/ip 교육을 받은 후 네트워크 통신을 활용한 멀티 가능 게임을 만든다.
 # 클래스 다이어그램
-
+![image](https://user-images.githubusercontent.com/22064581/157170516-9c16184c-abdc-4f86-a550-e4398ae7e118.png)
 
