@@ -14,6 +14,10 @@ void Board::startGame() {
 		this->openMenuPage();
 		break;
 
+	case Page::COMMUNICATIONS:
+		this->openCommunicationsPage();
+		break;
+
 	case Page::WRITE_NAME:
 		this->openWriteNamePage();
 		break;
@@ -43,6 +47,7 @@ void Board::openMenuPage() {
 	while (1) {
 		Pointer newPointer = menuCursor.cursorMove();
 		bool checkNextPage = menuCursor.cursorClick();
+
 		if (newPointer.y != nowPointer.y) {
 			gotoxy(newPointer);
 			cout << "¢º";
@@ -51,11 +56,67 @@ void Board::openMenuPage() {
 			nowPointer.x = newPointer.x;
 			nowPointer.y = newPointer.y;
 		}
+
 		if (checkNextPage == true) {
+			if (nowPointer.y == 22) {
+				pageNumber = Page::COMMUNICATIONS;
+				system("cls");
+				this->startGame();
+			}
+			else {
+				exit(0);
+			}
+			return;
+		}
+
+	}
+	return;
+}
+
+void Board::openCommunicationsPage() {
+	indianPokerLogo();
+	communicationsPageUI();
+
+	Pointer nowPointer = { 48,22 };
+	CursorControl menuCursor(nowPointer);
+
+	gotoxy(nowPointer);
+	cout << "¢º";
+
+	while (1) {
+
+		Pointer newPointer = menuCursor.cursorMove();
+		bool checkNextPage = menuCursor.cursorClick();
+
+		if (newPointer.y != nowPointer.y) {
+
+			gotoxy(newPointer);
+			cout << "¢º";
+			indianPokerLogo();
+			communicationsPageUI();
+			nowPointer.x = newPointer.x;
+			nowPointer.y = newPointer.y;
+		}
+
+		if (checkNextPage == true) {
+			if (nowPointer.y == 23) {
+				communicaionsState = Communications::SERVER;
+				server = new Server();
+				
+			}
+			else if (nowPointer.y == 24) {
+				communicaionsState = Communications::CLIENT;
+				client = new Client();
+			}
+			else {
+				Communications::SINGLE;
+			}
 			pageNumber = Page::WRITE_NAME;
 			system("cls");
 			this->startGame();
 			return;
+			
+
 		}
 	}
 	return;
@@ -65,19 +126,48 @@ void Board::openMenuPage() {
 void Board::openWriteNamePage() {
 
 	indianPokerLogo();
-	namePageUI();
+	
 
 	Pointer nowPointer = { 68,22 };
 	string playerName;
+	
+	if (communicaionsState == Communications::SINGLE) {
+		namePageUI();
 
-	gotoxy(nowPointer);
-	cin >> playerName;
-	dealer.setPlayer(playerName, PlayerPosition::LEFTPLAYER);
+		gotoxy(nowPointer);
+		cin >> playerName;
+		dealer.setPlayer(playerName, PlayerPosition::LEFTPLAYER);
 
-	nowPointer.y += 2;
-	gotoxy(nowPointer);
-	cin >> playerName;
-	dealer.setPlayer(playerName, PlayerPosition::RIGHTPLAYER);
+		nowPointer.y += 2;
+		gotoxy(nowPointer);
+		cin >> playerName;
+		dealer.setPlayer(playerName, PlayerPosition::RIGHTPLAYER);
+	}
+
+	else if (communicaionsState == Communications::SERVER) { 
+
+		serverNamePageUI();
+
+		gotoxy(nowPointer);
+		cin >> playerName;
+
+		dealer.setPlayer(playerName, PlayerPosition::LEFTPLAYER);
+
+		playerName = server->connectNameClient(playerName);
+		dealer.setPlayer(playerName, PlayerPosition::RIGHTPLAYER);
+	}
+
+	else {
+		clientNamePageUI();
+
+		gotoxy(nowPointer);
+		cin >> playerName;
+
+		dealer.setPlayer(playerName, PlayerPosition::RIGHTPLAYER);
+
+		playerName = client->connectNameServer(playerName);
+		dealer.setPlayer(playerName, PlayerPosition::LEFTPLAYER);
+	}
 
 	pageNumber = Page::START_GAME;
 	system("cls");
@@ -87,15 +177,43 @@ void Board::openWriteNamePage() {
 
 
 void Board::openStartGamePage() {
+
 	bool winnerCheck = true;
 
-	for (int i = 0; i < 10; i++) { 
-		dealer.giveCardToPlayer();
-		dealer.receiveToBettingMoney();
-		dealer.BettingStart();
-		winnerCheck = dealer.turnCheck();
-		if (winnerCheck == false) {
-			break;
+
+	if (communicaionsState == Communications::SINGLE) {
+
+		for (int i = 0; i < 10; i++) {
+			dealer.giveCardToPlayer();
+			dealer.receiveToBettingMoney();
+			dealer.BettingStart();
+			winnerCheck = dealer.turnCheck();
+			if (winnerCheck == false) {
+				break;
+			}
+		}
+	}
+
+	else if (communicaionsState == Communications::SERVER) {
+		for (int i = 0; i < 10; i++) {
+			dealer.giveCardToPlayer();
+			dealer.receiveToBettingMoney();
+			dealer.ServerBettingStart(server);
+			winnerCheck = dealer.turnCheck();
+			if (winnerCheck == false) {
+				break;
+			}
+		}
+	}
+
+	else {
+		for (int i = 0; i < 10; i++) {
+			dealer.receiveToBettingMoney();
+			dealer.ClientBettingStart(client);
+			winnerCheck = dealer.turnCheck();
+			if (winnerCheck == false) {
+				break;
+			}
 		}
 	}
 

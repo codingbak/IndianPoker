@@ -1,3 +1,4 @@
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include "board.h"
 
 #define PAGE_COUNT 4

@@ -15,7 +15,6 @@ Dealer::Dealer() {
 
 
 void Dealer::setPlayer(string playerName, int playerPosition) {
-
 	player[playerPosition] = new Player(playerName);
 }
 
@@ -133,6 +132,199 @@ void Dealer::BettingStart() {
 	return;
 }
 
+void Dealer::ServerBettingStart(Server* server) {
+	int leftPlayerBettingMoney = 0;
+	int rightPlayerBettingMoney = 0;
+	int remainingMoney = 0;
+	bool giveUp = false;
+
+	system("cls");
+	GamePageInfo gamePageInfo;
+	gamePageInfo.leftPlayerMoney = player[0]->getPlayerMoney();
+	gamePageInfo.rightPlayerMoney = player[1]->getPlayerMoney();
+	gamePageInfo.leftPlayerBettingMoney = leftPlayerBettingMoney;
+	gamePageInfo.rightPlayerBettingMoney = rightPlayerBettingMoney;
+	gamePageInfo.currentAllBettingMoney = bettingMoney;
+	gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+
+	CurrentPlayerCardSet currentCardSet;
+
+	currentCardSet.leftPlayerCard = player[0]->getPlayerCardNumber();
+	server->sendCardClient(currentCardSet.leftPlayerCard);
+	currentCardSet.rightPlayerCard = player[1]->getPlayerCardNumber();
+	server->sendCardClient(currentCardSet.rightPlayerCard);
+	gamePageCardUI(10, RED);
+	gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
+
+	gamePageBettingUI();
+	gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
+	gamePagePlayerInfoInsertUI(gamePageInfo);
+	gamePageGameTipUI();
+
+	do {
+		int moneyBuffer = 0;
+
+		if (playerInProgress == PlayerPosition::LEFTPLAYER) {
+			moneyBuffer = leftPlayerBettingMoney;
+			gotoxy(10, 25);
+			int sendBettingMoney = player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[0]->getPlayerMoney());
+			leftPlayerBettingMoney += sendBettingMoney;
+			server->sendBettingClient(sendBettingMoney);
+			if (leftPlayerBettingMoney == moneyBuffer) {
+
+				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
+					break;
+				}
+				else {
+					giveUp = true;
+					break;
+				}
+			}
+
+			playerInProgress = PlayerPosition::RIGHTPLAYER;
+			remainingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+			bettingMoney += leftPlayerBettingMoney - moneyBuffer;
+		}
+
+		else {
+			moneyBuffer = rightPlayerBettingMoney;
+			int clientBettingMoney = server->receiveBettingClient();
+			gotoxy(100, 25);
+			player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer(clientBettingMoney);
+			rightPlayerBettingMoney += clientBettingMoney;
+
+			if (rightPlayerBettingMoney == moneyBuffer) {
+
+				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
+					break;
+				}
+				else {
+					giveUp = true;
+					break;
+				}
+			}
+
+			playerInProgress = PlayerPosition::LEFTPLAYER;
+			remainingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+			bettingMoney += rightPlayerBettingMoney - moneyBuffer;
+		}
+		////////////여기서부터 시작 하면 될듯 월요일에
+		gamePageInfo.leftPlayerMoney = player[0]->getPlayerMoney();
+		gamePageInfo.rightPlayerMoney = player[1]->getPlayerMoney();
+		gamePageInfo.leftPlayerBettingMoney = leftPlayerBettingMoney;
+		gamePageInfo.rightPlayerBettingMoney = rightPlayerBettingMoney;
+		gamePageInfo.currentAllBettingMoney = bettingMoney;
+		gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+
+		system("cls");
+		gamePageCardUI(currentCardSet.leftPlayerCard, RED);
+		gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
+		gamePageBettingUI();
+		gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
+		gamePagePlayerInfoInsertUI(gamePageInfo);
+		gamePageGameTipUI();
+	} while (leftPlayerBettingMoney != rightPlayerBettingMoney);
+
+	checkWinner(giveUp);
+	return;
+}
+
+void Dealer::ClientBettingStart(Client* client) {
+	int leftPlayerBettingMoney = 0;
+	int rightPlayerBettingMoney = 0;
+	int remainingMoney = 0;
+	bool giveUp = false;
+
+	system("cls");
+	GamePageInfo gamePageInfo;
+	gamePageInfo.leftPlayerMoney = player[0]->getPlayerMoney();
+	gamePageInfo.rightPlayerMoney = player[1]->getPlayerMoney();
+	gamePageInfo.leftPlayerBettingMoney = leftPlayerBettingMoney;
+	gamePageInfo.rightPlayerBettingMoney = rightPlayerBettingMoney;
+	gamePageInfo.currentAllBettingMoney = bettingMoney;
+	gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+
+	CurrentPlayerCardSet currentCardSet;
+
+	currentCardSet.leftPlayerCard = client->receiveCardServer();
+	player[PlayerPosition::LEFTPLAYER]->setPlayerCardNumber(currentCardSet.leftPlayerCard);
+	currentCardSet.rightPlayerCard = client->receiveCardServer();
+	player[PlayerPosition::RIGHTPLAYER]->setPlayerCardNumber(currentCardSet.rightPlayerCard);
+	gamePageCardUI(currentCardSet.leftPlayerCard, RED);
+	gamePageCardUI(10, BLACK);
+
+	gamePageBettingUI();
+	gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
+	gamePagePlayerInfoInsertUI(gamePageInfo);
+	gamePageGameTipUI();
+
+	do {
+		int moneyBuffer = 0;
+
+		if (playerInProgress == PlayerPosition::LEFTPLAYER) {
+			moneyBuffer = leftPlayerBettingMoney;
+			int serverBettingMoney = client->receiveBettingServer();
+			gotoxy(10, 25);
+			player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(serverBettingMoney);
+			leftPlayerBettingMoney += serverBettingMoney;
+			if (leftPlayerBettingMoney == moneyBuffer) {
+
+				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
+					break;
+				}
+				else {
+					giveUp = true;
+					break;
+				}
+			}
+
+			playerInProgress = PlayerPosition::RIGHTPLAYER;
+			remainingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+			bettingMoney += leftPlayerBettingMoney - moneyBuffer;
+		}
+
+		else {
+			moneyBuffer = rightPlayerBettingMoney;
+			gotoxy(10, 25);
+			int sendBettingMoney = player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[1]->getPlayerMoney());
+			rightPlayerBettingMoney += sendBettingMoney;
+			client->sendBettingServer(sendBettingMoney);
+
+			if (rightPlayerBettingMoney == moneyBuffer) {
+
+				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
+					break;
+				}
+				else {
+					giveUp = true;
+					break;
+				}
+			}
+
+			playerInProgress = PlayerPosition::LEFTPLAYER;
+			remainingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+			bettingMoney += rightPlayerBettingMoney - moneyBuffer;
+		}
+		////////////여기서부터 시작 하면 될듯 월요일에
+		gamePageInfo.leftPlayerMoney = player[0]->getPlayerMoney();
+		gamePageInfo.rightPlayerMoney = player[1]->getPlayerMoney();
+		gamePageInfo.leftPlayerBettingMoney = leftPlayerBettingMoney;
+		gamePageInfo.rightPlayerBettingMoney = rightPlayerBettingMoney;
+		gamePageInfo.currentAllBettingMoney = bettingMoney;
+		gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
+
+		system("cls");
+		gamePageCardUI(currentCardSet.leftPlayerCard, RED);
+		gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
+		gamePageBettingUI();
+		gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
+		gamePagePlayerInfoInsertUI(gamePageInfo);
+		gamePageGameTipUI();
+	} while (leftPlayerBettingMoney != rightPlayerBettingMoney);
+
+	checkWinner(giveUp);
+	return;
+}
 
 void Dealer::checkWinner(bool giveUp) {
 

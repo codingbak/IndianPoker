@@ -17,11 +17,32 @@ void menuPageUI() {
 }
 
 
+void communicationsPageUI() {
+	
+	gotoxy(50, 22);
+	cout << "Single";
+	gotoxy(50, 23);
+	cout << "Server";
+	gotoxy(50, 24);
+	cout << "Client";
+}
+
+
 void namePageUI() {
 
 	gotoxy(40, 22);
 	cout << "Player 1 이름을 입력하시오 : ";
 	gotoxy(40, 24);
+	cout << "Player 2 이름을 입력하시오 : ";
+}
+void serverNamePageUI() {
+
+	gotoxy(40, 22);
+	cout << "Player 1 이름을 입력하시오 : ";
+}
+void clientNamePageUI() {
+
+	gotoxy(40, 22);
 	cout << "Player 2 이름을 입력하시오 : ";
 }
 
@@ -379,7 +400,30 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 		gotoxy(cardPointX, 14);
 		cout << "    ■■■■■" << endl;
 		break;
+	case 10:
+		gotoxy(cardPointX, 5);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 6);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 7);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 8);
+		cout << "      ■■■  " << endl;
+		gotoxy(cardPointX, 9);
+		cout << "    ■      ■" << endl;
+		gotoxy(cardPointX, 10);
+		cout << "            ■" << endl;
+		gotoxy(cardPointX, 11);
+		cout << "          ■  " << endl;
+		gotoxy(cardPointX, 12);
+		cout << "        ■    " << endl;
+		gotoxy(cardPointX, 13);
+		cout << "              " << endl;
+		gotoxy(cardPointX, 14);
+		cout << "        ■    " << endl;
+		break;
 	}
+
 
 	textColor(WHITE, BLACK);
 }

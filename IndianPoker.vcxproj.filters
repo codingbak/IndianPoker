@@ -36,6 +36,12 @@
     <ClCompile Include="board.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="server.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="card.h">
@@ -54,6 +60,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="board.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="server.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="client.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

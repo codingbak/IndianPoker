@@ -26,6 +26,8 @@ public:
 
 	int giveBasicBettingMoneyToDealer();
 	int giveBettingMoneyToDealer(int remainingMoney,int enemyPlayerMoney);
+	void giveBettingMoneyToDealer(int bettingMoney);
+
 	int getPlayerMoney();
 	void receiveVictoryMoney(int victoryMoney);
 	int receiveDrawMoney();

@@ -47,6 +47,12 @@ int Player::giveBasicBettingMoneyToDealer() {
 		return BASIC_BET;
 }
 
+void Player::giveBettingMoneyToDealer(int bettingMoney) {
+
+	playerMoney -= bettingMoney;
+
+	return;
+}
 
 int Player::giveBettingMoneyToDealer(int remainingMoney, int enemyPlayerMoney) {
 

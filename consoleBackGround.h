@@ -19,7 +19,10 @@ struct GamePageInfo {
 
 void indianPokerLogo();
 void menuPageUI();
+void communicationsPageUI();
 void namePageUI();
+void serverNamePageUI();
+void clientNamePageUI();
 void gamePageCardUI(int cardNumber, int cardColor);
 void gamePageBettingUI();
 void gamePagePlayerUI(std::string namePlayerA, std::string namePlayerB);

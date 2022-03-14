@@ -4,6 +4,8 @@
 #include "player.h"
 #include "consoleBackGround.h"
 #include <stdlib.h>
+#include "server.h"
+#include "client.h"
 
 
 using namespace std;
@@ -41,6 +43,8 @@ public:
 	CurrentPlayerCardSet getCurrentCardNumber();
 	void receiveToBettingMoney();
 	void BettingStart();
+	void ServerBettingStart(Server* server);
+	void ClientBettingStart(Client* client);
 	void checkWinner(bool giveUp);
 	bool turnCheck();
 	string winnerSelect();
