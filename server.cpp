@@ -18,23 +18,29 @@ Server::Server() {
 	bind(hServSock, (SOCKADDR*)&servAddr, sizeof(servAddr));
 	//listen
 	listen(hServSock, 5);
-
+	
 	clientLen = sizeof(clientAddr);
 	hClientSock = accept(hServSock, (SOCKADDR*)&clientAddr, &clientLen);
 }
 
-std::string Server::connectNameClient(std::string serverName) {
+std::string Server::receiveNameClient() {
 	int strLen = 0;
-	char serverMessage[BUFSIZE] = "";
-	char clientMessage[BUFSIZE] = "";
-	std::strcpy(serverMessage, serverName.c_str());
 
+	char clientMessage[BUFSIZE] = "";
 
 	strLen = recv(hClientSock, clientMessage, BUFSIZE, 0);
-	send(hClientSock, serverMessage, strLen, 0);
-
+	
 	std::string clientName(clientMessage);
 	return clientName;
+}
+
+void Server::sendNameClient(std::string serverName) {
+	char serverMessage[BUFSIZE] = "";
+
+	std::strcpy(serverMessage, serverName.c_str());
+	send(hClientSock, serverMessage, strlen(serverMessage), 0);
+
+	return;
 }
 
 void Server::sendCardClient(int cardNumber) {
@@ -44,7 +50,7 @@ void Server::sendCardClient(int cardNumber) {
 
 	std::strcpy(cardMessage, cardString.c_str());
 
-	int strLen = send(hClientSock, cardMessage, strlen(cardMessage), 0);
+	send(hClientSock, cardMessage, strlen(cardMessage), 0);
 
 	return;
 	
@@ -57,7 +63,7 @@ void Server::sendBettingClient(int bettingMoney) {
 
 	std::strcpy(bettingMoneyMessage, bettingMoneyString.c_str());
 
-	int strLen = send(hClientSock, bettingMoneyMessage, strlen(bettingMoneyMessage), 0);
+	send(hClientSock, bettingMoneyMessage, strlen(bettingMoneyMessage), 0);
 
 	return;
 

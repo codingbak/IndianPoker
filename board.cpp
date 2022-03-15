@@ -152,21 +152,19 @@ void Board::openWriteNamePage() {
 		cin >> playerName;
 
 		dealer.setPlayer(playerName, PlayerPosition::LEFTPLAYER);
-
-		playerName = server->connectNameClient(playerName);
+		server->sendNameClient(playerName);
+		playerName = server->receiveNameClient();
 		dealer.setPlayer(playerName, PlayerPosition::RIGHTPLAYER);
 	}
 
 	else {
 		clientNamePageUI();
-
+		playerName = client->receiveNameServer();
+		dealer.setPlayer(playerName, PlayerPosition::LEFTPLAYER);
 		gotoxy(nowPointer);
 		cin >> playerName;
-
+		client->sendNameServer(playerName);
 		dealer.setPlayer(playerName, PlayerPosition::RIGHTPLAYER);
-
-		playerName = client->connectNameServer(playerName);
-		dealer.setPlayer(playerName, PlayerPosition::LEFTPLAYER);
 	}
 
 	pageNumber = Page::START_GAME;

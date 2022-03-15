@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-
+#include <iostream>
 
 class Server {
 
@@ -23,7 +23,8 @@ private:
 
 public:
 	Server();
-	std::string connectNameClient(std::string serverName);
+	std::string receiveNameClient();
+	void sendNameClient(std::string serverName);
 	int receiveBettingClient();
 	void sendCardClient(int cardNumber);
 	void sendBettingClient(int bettingMoney);

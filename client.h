@@ -16,7 +16,8 @@ private:
 
 public:
 	Client();
-	std::string connectNameServer(std::string clientName);
+	std::string receiveNameServer();
+	void sendNameServer(std::string clientName);
 	int receiveCardServer();
 	int receiveBettingServer();
 	void sendBettingServer(int bettingMoney);

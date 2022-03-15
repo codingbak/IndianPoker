@@ -3,7 +3,7 @@
 #define BLACK 0
 #define RED 4
 #define WHITE 15
-
+#define BLUE 9
 using namespace std;
 
 
@@ -35,11 +35,15 @@ void namePageUI() {
 	gotoxy(40, 24);
 	cout << "Player 2 이름을 입력하시오 : ";
 }
+
+
 void serverNamePageUI() {
 
 	gotoxy(40, 22);
 	cout << "Player 1 이름을 입력하시오 : ";
 }
+
+
 void clientNamePageUI() {
 
 	gotoxy(40, 22);
@@ -485,7 +489,8 @@ void gamePageGameTipUI() {
 	cout << "※ 다이를 외치는 방법은 베팅 금액을 0을 입력하면 됩니다.";
 	gotoxy(38, 32);
 	cout << "※ 10을 들고 다이를 외치면 패널티 1000000을 잃게 됩니다.";
-
+	gotoxy(30, 33);
+	cout << "※ 화면이 잠시 꺼질때는 숫자를 눌러주면 다시나와요.";
 }
 
 
@@ -505,4 +510,25 @@ void endPageWinnerUI(std::string winnerPlayer)
 		cout << "☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★";
 		Sleep(50);
 	}
+}
+
+
+void endTurnPage(int winner, int money) {
+	if (winner == 0) {
+		textColor(RED, BLACK);
+		gotoxy(10, 23);
+		cout << "+" << money;
+		textColor(BLUE, BLACK);
+		gotoxy(100, 23);
+		cout << "-" << money;
+	}
+	else {
+		textColor(BLUE, BLACK);
+		gotoxy(10, 23);
+		cout << "-" << money;
+		textColor(RED, BLACK);
+		gotoxy(100, 23);
+		cout << "+" << money;
+	}
+	textColor(WHITE, BLACK);
 }

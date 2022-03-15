@@ -63,7 +63,10 @@ int Player::giveBettingMoneyToDealer(int remainingMoney, int enemyPlayerMoney) {
 
 
 		while (1) {
-			if (minBettingMoney > bettingMoney) {
+			if(bettingMoney==0) {
+				break;
+			}
+			else if (minBettingMoney > bettingMoney) {
 				cout << "call보다 적은 금액을 입력하셨습니다.";
 				cin >> bettingMoney;
 			}

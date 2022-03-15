@@ -6,6 +6,7 @@ Dealer::Dealer() {
 
 	bettingMoney = 0;
 	playerInProgress = 0;
+	abstentionBettingMoney = 0;
 	turn = 0;
 	card[0] = new Card(CardColor::RED);
 	card[1] = new Card(CardColor::BLACK);
@@ -127,7 +128,6 @@ void Dealer::BettingStart() {
 		gamePagePlayerInfoInsertUI(gamePageInfo);
 		gamePageGameTipUI();
 		} while (leftPlayerBettingMoney != rightPlayerBettingMoney);
-
 	checkWinner(giveUp);
 	return;
 }
@@ -148,9 +148,10 @@ void Dealer::ServerBettingStart(Server* server) {
 	gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
 
 	CurrentPlayerCardSet currentCardSet;
-
+	Sleep(100);
 	currentCardSet.leftPlayerCard = player[0]->getPlayerCardNumber();
 	server->sendCardClient(currentCardSet.leftPlayerCard);
+	Sleep(100);
 	currentCardSet.rightPlayerCard = player[1]->getPlayerCardNumber();
 	server->sendCardClient(currentCardSet.rightPlayerCard);
 	gamePageCardUI(10, RED);
@@ -168,6 +169,9 @@ void Dealer::ServerBettingStart(Server* server) {
 			moneyBuffer = leftPlayerBettingMoney;
 			gotoxy(10, 25);
 			int sendBettingMoney = player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[0]->getPlayerMoney());
+			if (sendBettingMoney != 0) {
+				abstentionBettingMoney = sendBettingMoney;
+			}
 			leftPlayerBettingMoney += sendBettingMoney;
 			server->sendBettingClient(sendBettingMoney);
 			if (leftPlayerBettingMoney == moneyBuffer) {
@@ -192,7 +196,9 @@ void Dealer::ServerBettingStart(Server* server) {
 			gotoxy(100, 25);
 			player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer(clientBettingMoney);
 			rightPlayerBettingMoney += clientBettingMoney;
-
+			if (clientBettingMoney != 0) {
+				abstentionBettingMoney = clientBettingMoney;
+			}
 			if (rightPlayerBettingMoney == moneyBuffer) {
 
 				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
@@ -217,15 +223,17 @@ void Dealer::ServerBettingStart(Server* server) {
 		gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
 
 		system("cls");
-		gamePageCardUI(currentCardSet.leftPlayerCard, RED);
+		gamePageCardUI(10, RED);
 		gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
 		gamePageBettingUI();
 		gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
 		gamePagePlayerInfoInsertUI(gamePageInfo);
 		gamePageGameTipUI();
 	} while (leftPlayerBettingMoney != rightPlayerBettingMoney);
-
+	gamePageCardUI(currentCardSet.leftPlayerCard, RED);
+	gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
 	checkWinner(giveUp);
+	abstentionBettingMoney = 0;
 	return;
 }
 
@@ -266,6 +274,9 @@ void Dealer::ClientBettingStart(Client* client) {
 			int serverBettingMoney = client->receiveBettingServer();
 			gotoxy(10, 25);
 			player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(serverBettingMoney);
+			if (serverBettingMoney != 0) {
+				abstentionBettingMoney = serverBettingMoney;
+			}
 			leftPlayerBettingMoney += serverBettingMoney;
 			if (leftPlayerBettingMoney == moneyBuffer) {
 
@@ -285,11 +296,13 @@ void Dealer::ClientBettingStart(Client* client) {
 
 		else {
 			moneyBuffer = rightPlayerBettingMoney;
-			gotoxy(10, 25);
+			gotoxy(100, 25);
 			int sendBettingMoney = player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[1]->getPlayerMoney());
 			rightPlayerBettingMoney += sendBettingMoney;
 			client->sendBettingServer(sendBettingMoney);
-
+			if (sendBettingMoney != 0) {
+				abstentionBettingMoney = sendBettingMoney;
+			}
 			if (rightPlayerBettingMoney == moneyBuffer) {
 
 				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
@@ -315,14 +328,16 @@ void Dealer::ClientBettingStart(Client* client) {
 
 		system("cls");
 		gamePageCardUI(currentCardSet.leftPlayerCard, RED);
-		gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
+		gamePageCardUI(10, BLACK);
 		gamePageBettingUI();
 		gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
 		gamePagePlayerInfoInsertUI(gamePageInfo);
 		gamePageGameTipUI();
 	} while (leftPlayerBettingMoney != rightPlayerBettingMoney);
-
+	gamePageCardUI(currentCardSet.leftPlayerCard, RED);
+	gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
 	checkWinner(giveUp);
+	abstentionBettingMoney=0;
 	return;
 }
 
@@ -335,7 +350,14 @@ void Dealer::checkWinner(bool giveUp) {
 			if (player[0]->getPlayerCardNumber() == 9) {
 				bettingMoney += player[0]->givePenaltyMoney();
 			}
-
+			if (player[0]->getPlayerCardNumber() == 9) {
+				endTurnPage(1, (int)((bettingMoney - abstentionBettingMoney) - 1000000) / 2 + 1000000);
+				Sleep(6000);
+			}
+			else {
+				endTurnPage(1, (int)((bettingMoney - abstentionBettingMoney) / 2));
+				Sleep(6000);
+			}
 			player[1]->receiveVictoryMoney(bettingMoney);
 			bettingMoney = 0;
 		}
@@ -344,7 +366,14 @@ void Dealer::checkWinner(bool giveUp) {
 			if (player[1]->getPlayerCardNumber() == 9) {
 				bettingMoney += player[1]->givePenaltyMoney();
 			}
-
+			if (player[1]->getPlayerCardNumber() == 9) {
+				endTurnPage(0, (int)((bettingMoney - abstentionBettingMoney) - 1000000) / 2 + 1000000);
+				Sleep(6000);
+			}
+			else {
+				endTurnPage(0, (int)((bettingMoney - abstentionBettingMoney) / 2));
+				Sleep(6000);
+			}
 			player[0]->receiveVictoryMoney(bettingMoney);
 			bettingMoney = 0;
 		}
@@ -354,15 +383,21 @@ void Dealer::checkWinner(bool giveUp) {
 		
 		if (player[0]->getPlayerCardNumber() < player[1]->getPlayerCardNumber()) {
 			player[1]->receiveVictoryMoney(bettingMoney);
+			endTurnPage(1, (int)bettingMoney/2);
+			Sleep(6000);
 			bettingMoney = 0;
 			playerInProgress = PlayerPosition::RIGHTPLAYER;
+			
 		}
 		else if (player[0]->getPlayerCardNumber() > player[1]->getPlayerCardNumber()) {
 			player[0]->receiveVictoryMoney(bettingMoney);
+			endTurnPage(0, (int)bettingMoney/2);
+			Sleep(6000);
 			bettingMoney = 0;
 			playerInProgress = PlayerPosition::LEFTPLAYER;
 		}
 		else {
+			Sleep(6000);
 			bettingMoney -= player[0]->receiveDrawMoney();
 			bettingMoney -= player[1]->receiveDrawMoney();
 		}

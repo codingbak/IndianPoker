@@ -16,29 +16,30 @@ Client::Client() {
 }
 
 
-std::string Client::connectNameServer(std::string clientName) {
+std::string Client::receiveNameServer() {
 
-	char ClientMessage[BUFSIZE] = "";
 	char ServerMessage[BUFSIZE] = "";
-	std::strcpy(ClientMessage, clientName.c_str());
+	int strLen = 0;
 
-	int strLen = send(hSocket, ClientMessage, strlen(ClientMessage), 0);
-
-	strLen = recv(hSocket, ServerMessage, BUFSIZE - 1, 0);
+	strLen = recv(hSocket, ServerMessage, BUFSIZE, 0);
 	std::string serverName(ServerMessage);
-	ClientMessage[strLen] = 0;
-
 	return serverName;
+}
+void Client::sendNameServer(std::string clientName) {
+	char ClientMessage[BUFSIZE] = "";
+
+	std::strcpy(ClientMessage, clientName.c_str());
+	send(hSocket, ClientMessage, strlen(ClientMessage), 0);
+	return;
+
 }
 
 int Client::receiveCardServer() {
 	int strLen = 0;
 	int cardNumber = 0;
 	char cardNumberMessage[BUFSIZE] = "";
-
 	strLen = recv(hSocket, cardNumberMessage, BUFSIZE, 0);
 	std::string cardNumberString(cardNumberMessage);
-
 	cardNumber = std::stoi(cardNumberString);
 
 	return cardNumber;
@@ -50,6 +51,7 @@ int Client::receiveBettingServer() {
 	char bettingMoneyMessage[BUFSIZE] = "";
 
 	strLen = recv(hSocket, bettingMoneyMessage, BUFSIZE, 0);
+
 	std::string bettingMoneyString(bettingMoneyMessage);
 
 	bettingMoney = std::stoi(bettingMoneyString);
@@ -64,7 +66,7 @@ void Client::sendBettingServer(int bettingMoney) {
 
 	std::strcpy(bettingMoneyMessage, bettingMoneyString.c_str());
 
-	int strLen = send(hSocket, bettingMoneyMessage, strlen(bettingMoneyMessage), 0);
+	send(hSocket, bettingMoneyMessage, strlen(bettingMoneyMessage), 0);
 
 	return ;
 }

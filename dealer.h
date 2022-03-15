@@ -1,12 +1,11 @@
 #pragma once
+#include "server.h"
+#include "client.h"
 #include <string>
 #include "card.h"
 #include "player.h"
 #include "consoleBackGround.h"
 #include <stdlib.h>
-#include "server.h"
-#include "client.h"
-
 
 using namespace std;
 
@@ -30,6 +29,7 @@ class Dealer {
 
 private:
 	int bettingMoney;
+	int abstentionBettingMoney;
 	int playerInProgress;
 	int turn;
 	Card* card[2];
