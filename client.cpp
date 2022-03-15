@@ -9,7 +9,8 @@ Client::Client() {
 
 	memset(&servAddr, 0, sizeof(servAddr));
 	servAddr.sin_family = AF_INET;
-	servAddr.sin_addr.s_addr = inet_addr("210.181.148.40");
+	//210.181.148.40
+	servAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 	servAddr.sin_port = htons(5555);
 
 	connect(hSocket, (SOCKADDR*)&servAddr, sizeof(servAddr));

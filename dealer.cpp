@@ -75,7 +75,7 @@ void Dealer::BettingStart() {
 			moneyBuffer = leftPlayerBettingMoney;
 			gotoxy(10, 25);
 			leftPlayerBettingMoney += player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[1]->getPlayerMoney());
-
+			
 			if (leftPlayerBettingMoney == moneyBuffer) {
 
 				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
@@ -168,11 +168,11 @@ void Dealer::ServerBettingStart(Server* server) {
 		if (playerInProgress == PlayerPosition::LEFTPLAYER) {
 			moneyBuffer = leftPlayerBettingMoney;
 			gotoxy(10, 25);
-			int sendBettingMoney = player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[0]->getPlayerMoney());
+			int sendBettingMoney = player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[1]->getPlayerMoney());
+			leftPlayerBettingMoney += sendBettingMoney;
 			if (sendBettingMoney != 0) {
 				abstentionBettingMoney = sendBettingMoney;
 			}
-			leftPlayerBettingMoney += sendBettingMoney;
 			server->sendBettingClient(sendBettingMoney);
 			if (leftPlayerBettingMoney == moneyBuffer) {
 
@@ -274,10 +274,10 @@ void Dealer::ClientBettingStart(Client* client) {
 			int serverBettingMoney = client->receiveBettingServer();
 			gotoxy(10, 25);
 			player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(serverBettingMoney);
+			leftPlayerBettingMoney += serverBettingMoney;
 			if (serverBettingMoney != 0) {
 				abstentionBettingMoney = serverBettingMoney;
 			}
-			leftPlayerBettingMoney += serverBettingMoney;
 			if (leftPlayerBettingMoney == moneyBuffer) {
 
 				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
@@ -297,7 +297,7 @@ void Dealer::ClientBettingStart(Client* client) {
 		else {
 			moneyBuffer = rightPlayerBettingMoney;
 			gotoxy(100, 25);
-			int sendBettingMoney = player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[1]->getPlayerMoney());
+			int sendBettingMoney = player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[0]->getPlayerMoney());
 			rightPlayerBettingMoney += sendBettingMoney;
 			client->sendBettingServer(sendBettingMoney);
 			if (sendBettingMoney != 0) {
