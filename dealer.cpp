@@ -55,16 +55,16 @@ void Dealer::BettingStart() {
 	gamePageInfo.rightPlayerBettingMoney = rightPlayerBettingMoney;
 	gamePageInfo.currentAllBettingMoney = bettingMoney;
 	gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
-	
+
 	CurrentPlayerCardSet currentCardSet;
 
 	currentCardSet.leftPlayerCard = player[0]->getPlayerCardNumber();
 	currentCardSet.rightPlayerCard = player[1]->getPlayerCardNumber();
 	gamePageCardUI(currentCardSet.leftPlayerCard, RED);
 	gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
-	
+
 	gamePageBettingUI();
-	gamePagePlayerUI(player[0]->getPlayerName(),player[1]->getPlayerName());
+	gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
 	gamePagePlayerInfoInsertUI(gamePageInfo);
 	gamePageGameTipUI();
 
@@ -73,11 +73,11 @@ void Dealer::BettingStart() {
 
 		if (playerInProgress == PlayerPosition::LEFTPLAYER) {
 			moneyBuffer = leftPlayerBettingMoney;
-			gotoxy(10,25);
+			gotoxy(10, 25);
 			leftPlayerBettingMoney += player[PlayerPosition::LEFTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[1]->getPlayerMoney());
-			
+
 			if (leftPlayerBettingMoney == moneyBuffer) {
-				
+
 				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
 					break;
 				}
@@ -89,16 +89,16 @@ void Dealer::BettingStart() {
 
 			playerInProgress = PlayerPosition::RIGHTPLAYER;
 			remainingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
-			bettingMoney += leftPlayerBettingMoney-moneyBuffer;
-			}
+			bettingMoney += leftPlayerBettingMoney - moneyBuffer;
+		}
 
 		else {
 			moneyBuffer = rightPlayerBettingMoney;
 			gotoxy(100, 25);
 			rightPlayerBettingMoney += player[PlayerPosition::RIGHTPLAYER]->giveBettingMoneyToDealer(remainingMoney, player[0]->getPlayerMoney());
-			
+
 			if (rightPlayerBettingMoney == moneyBuffer) {
-				
+
 				if (player[0]->getPlayerMoney() == 0 || player[1]->getPlayerMoney() == 0) {
 					break;
 				}
@@ -107,10 +107,10 @@ void Dealer::BettingStart() {
 					break;
 				}
 			}
-			
+
 			playerInProgress = PlayerPosition::LEFTPLAYER;
 			remainingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
-			bettingMoney += rightPlayerBettingMoney-moneyBuffer;
+			bettingMoney += rightPlayerBettingMoney - moneyBuffer;
 		}
 		////////////여기서부터 시작 하면 될듯 월요일에
 		gamePageInfo.leftPlayerMoney = player[0]->getPlayerMoney();
@@ -127,7 +127,7 @@ void Dealer::BettingStart() {
 		gamePagePlayerUI(player[0]->getPlayerName(), player[1]->getPlayerName());
 		gamePagePlayerInfoInsertUI(gamePageInfo);
 		gamePageGameTipUI();
-		} while (leftPlayerBettingMoney != rightPlayerBettingMoney);
+	} while (leftPlayerBettingMoney != rightPlayerBettingMoney);
 	checkWinner(giveUp);
 	return;
 }
@@ -337,16 +337,16 @@ void Dealer::ClientBettingStart(Client* client) {
 	gamePageCardUI(currentCardSet.leftPlayerCard, RED);
 	gamePageCardUI(currentCardSet.rightPlayerCard, BLACK);
 	checkWinner(giveUp);
-	abstentionBettingMoney=0;
+	abstentionBettingMoney = 0;
 	return;
 }
 
 void Dealer::checkWinner(bool giveUp) {
 
 	if (giveUp == true) {
-		
+
 		if (playerInProgress == PlayerPosition::LEFTPLAYER) {
-			
+
 			if (player[0]->getPlayerCardNumber() == 9) {
 				bettingMoney += player[0]->givePenaltyMoney();
 			}
@@ -362,7 +362,7 @@ void Dealer::checkWinner(bool giveUp) {
 			bettingMoney = 0;
 		}
 		else {
-			
+
 			if (player[1]->getPlayerCardNumber() == 9) {
 				bettingMoney += player[1]->givePenaltyMoney();
 			}
@@ -378,20 +378,20 @@ void Dealer::checkWinner(bool giveUp) {
 			bettingMoney = 0;
 		}
 	}
-	
+
 	else {
-		
+
 		if (player[0]->getPlayerCardNumber() < player[1]->getPlayerCardNumber()) {
 			player[1]->receiveVictoryMoney(bettingMoney);
-			endTurnPage(1, (int)bettingMoney/2);
+			endTurnPage(1, (int)bettingMoney / 2);
 			Sleep(6000);
 			bettingMoney = 0;
 			playerInProgress = PlayerPosition::RIGHTPLAYER;
-			
+
 		}
 		else if (player[0]->getPlayerCardNumber() > player[1]->getPlayerCardNumber()) {
 			player[0]->receiveVictoryMoney(bettingMoney);
-			endTurnPage(0, (int)bettingMoney/2);
+			endTurnPage(0, (int)bettingMoney / 2);
 			Sleep(6000);
 			bettingMoney = 0;
 			playerInProgress = PlayerPosition::LEFTPLAYER;
@@ -407,8 +407,8 @@ void Dealer::checkWinner(bool giveUp) {
 
 
 bool Dealer::turnCheck() {
-	
-	if ((player[0]->getPlayerMoney() <= 100000)||(player[1]->getPlayerMoney() <= 100000)) {
+
+	if ((player[0]->getPlayerMoney() <= 100000) || (player[1]->getPlayerMoney() <= 100000)) {
 		return false;
 	}
 
@@ -446,7 +446,7 @@ void Dealer::engPageUI() {
 	gamePageInfo.rightPlayerBettingMoney = rightPlayerBettingMoney;
 	gamePageInfo.currentAllBettingMoney = bettingMoney;
 	gamePageInfo.currentCallBettingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
-	
+
 	gamePageCardUI(9, RED);
 	gamePageCardUI(9, BLACK);
 

@@ -50,4 +50,3 @@ public:
 	string winnerSelect();
 	void engPageUI();
 };
-

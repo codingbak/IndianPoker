@@ -61,14 +61,14 @@ int Client::receiveBettingServer() {
 
 void Client::sendBettingServer(int bettingMoney) {
 	char bettingMoneyMessage[BUFSIZE] = "";
-	
+
 	std::string bettingMoneyString = std::to_string(bettingMoney);
 
 	std::strcpy(bettingMoneyMessage, bettingMoneyString.c_str());
 
 	send(hSocket, bettingMoneyMessage, strlen(bettingMoneyMessage), 0);
 
-	return ;
+	return;
 }
 void Client::disconnectServer() {
 

@@ -1,4 +1,4 @@
-#include "board.h"
+ï»¿#include "board.h"
 
 
 
@@ -42,7 +42,7 @@ void Board::openMenuPage() {
 	CursorControl menuCursor(nowPointer);
 
 	gotoxy(nowPointer);
-	cout << "¢º";
+	cout << "â–¶";
 
 	while (1) {
 		Pointer newPointer = menuCursor.cursorMove();
@@ -50,7 +50,7 @@ void Board::openMenuPage() {
 
 		if (newPointer.y != nowPointer.y) {
 			gotoxy(newPointer);
-			cout << "¢º";
+			cout << "â–¶";
 			indianPokerLogo();
 			menuPageUI();
 			nowPointer.x = newPointer.x;
@@ -81,7 +81,7 @@ void Board::openCommunicationsPage() {
 	CursorControl menuCursor(nowPointer);
 
 	gotoxy(nowPointer);
-	cout << "¢º";
+	cout << "â–¶";
 
 	while (1) {
 
@@ -91,7 +91,7 @@ void Board::openCommunicationsPage() {
 		if (newPointer.y != nowPointer.y) {
 
 			gotoxy(newPointer);
-			cout << "¢º";
+			cout << "â–¶";
 			indianPokerLogo();
 			communicationsPageUI();
 			nowPointer.x = newPointer.x;
@@ -102,7 +102,7 @@ void Board::openCommunicationsPage() {
 			if (nowPointer.y == 23) {
 				communicaionsState = Communications::SERVER;
 				server = new Server();
-				
+
 			}
 			else if (nowPointer.y == 24) {
 				communicaionsState = Communications::CLIENT;
@@ -115,7 +115,7 @@ void Board::openCommunicationsPage() {
 			system("cls");
 			this->startGame();
 			return;
-			
+
 
 		}
 	}
@@ -126,11 +126,11 @@ void Board::openCommunicationsPage() {
 void Board::openWriteNamePage() {
 
 	indianPokerLogo();
-	
+
 
 	Pointer nowPointer = { 68,22 };
 	string playerName;
-	
+
 	if (communicaionsState == Communications::SINGLE) {
 		namePageUI();
 
@@ -144,7 +144,7 @@ void Board::openWriteNamePage() {
 		dealer.setPlayer(playerName, PlayerPosition::RIGHTPLAYER);
 	}
 
-	else if (communicaionsState == Communications::SERVER) { 
+	else if (communicaionsState == Communications::SERVER) {
 
 		serverNamePageUI();
 
@@ -217,7 +217,7 @@ void Board::openStartGamePage() {
 
 	pageNumber = Page::END_GAME;
 	system("cls");
-	this -> startGame();
+	this->startGame();
 	return;
 }
 void Board::openEndGamePage() {
@@ -227,4 +227,3 @@ void Board::openEndGamePage() {
 
 	return;
 }
-

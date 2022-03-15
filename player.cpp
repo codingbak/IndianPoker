@@ -31,20 +31,20 @@ int Player::getPlayerMoney() {
 
 void Player::setPlayerCardNumber(int cardNumber) {
 
-		this->playerCardNumber = cardNumber;
+	this->playerCardNumber = cardNumber;
 }
 
 
 int Player::getPlayerCardNumber() {
 
-		return playerCardNumber;
+	return playerCardNumber;
 }
 
 
 int Player::giveBasicBettingMoneyToDealer() {
 
-		playerMoney -= BASIC_BET;
-		return BASIC_BET;
+	playerMoney -= BASIC_BET;
+	return BASIC_BET;
 }
 
 void Player::giveBettingMoneyToDealer(int bettingMoney) {
@@ -56,37 +56,37 @@ void Player::giveBettingMoneyToDealer(int bettingMoney) {
 
 int Player::giveBettingMoneyToDealer(int remainingMoney, int enemyPlayerMoney) {
 
-		int bettingMoney = 0;
-		int maxBettingMoney = enemyPlayerMoney + remainingMoney;
-		int minBettingMoney = remainingMoney;
-		cin >> bettingMoney;
+	int bettingMoney = 0;
+	int maxBettingMoney = enemyPlayerMoney + remainingMoney;
+	int minBettingMoney = remainingMoney;
+	cin >> bettingMoney;
 
 
-		while (1) {
-			if(bettingMoney==0) {
-				break;
-			}
-			else if (minBettingMoney > bettingMoney) {
-				cout << "call보다 적은 금액을 입력하셨습니다.";
-				cin >> bettingMoney;
-			}
-			else if (maxBettingMoney < bettingMoney) {
-				cout << "너무 높은 베팅을 입력하셨습니다.";
-				cin >> bettingMoney;
-			}
-			else {
-				break;
-			}
+	while (1) {
+		if (bettingMoney == 0) {
+			break;
 		}
+		else if (minBettingMoney > bettingMoney) {
+			cout << "call보다 적은 금액을 입력하셨습니다.";
+			cin >> bettingMoney;
+		}
+		else if (maxBettingMoney < bettingMoney) {
+			cout << "너무 높은 베팅을 입력하셨습니다.";
+			cin >> bettingMoney;
+		}
+		else {
+			break;
+		}
+	}
 
-		playerMoney -= bettingMoney;
-		return bettingMoney;
+	playerMoney -= bettingMoney;
+	return bettingMoney;
 }
 
 
 void Player::receiveVictoryMoney(int victoryMoney) {
 
-		playerMoney += victoryMoney;
+	playerMoney += victoryMoney;
 }
 
 

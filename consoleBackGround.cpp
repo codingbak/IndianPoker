@@ -18,7 +18,7 @@ void menuPageUI() {
 
 
 void communicationsPageUI() {
-	
+
 	gotoxy(50, 22);
 	cout << "Single";
 	gotoxy(50, 23);
@@ -154,13 +154,13 @@ void indianPokerLogo() {
 	cout << "■      ■" << endl;
 	gotoxy(90, 19);
 	cout << "■      ■" << endl;
-	
+
 	textColor(WHITE, BLACK);
 }
 
 
 void gamePageCardUI(int cardNumber, int cardColor) {
-	
+
 	int cardPointX = 0;
 
 	if (cardColor == RED) {
@@ -175,7 +175,7 @@ void gamePageCardUI(int cardNumber, int cardColor) {
 
 	switch (cardNumber)
 	{
-	case 0 : 
+	case 0:
 		gotoxy(cardPointX, 5);
 		cout << "              " << endl;
 		gotoxy(cardPointX, 6);
@@ -444,8 +444,8 @@ void gamePageBettingUI() {
 
 void gamePagePlayerUI(std::string namePlayerA, std::string namePlayerB) {
 
-	gotoxy(10,17);
-	cout << namePlayerA<< " Player";
+	gotoxy(10, 17);
+	cout << namePlayerA << " Player";
 	gotoxy(10, 21);
 	cout << "현재 자본";
 	gotoxy(25, 9);
@@ -454,7 +454,7 @@ void gamePagePlayerUI(std::string namePlayerA, std::string namePlayerB) {
 	cout << "베팅금을 입력하시오";
 	gotoxy(100, 17);
 
-	cout << namePlayerB <<" Player";
+	cout << namePlayerB << " Player";
 	gotoxy(100, 21);
 	cout << "현재 자본";
 	gotoxy(85, 9);
@@ -489,14 +489,14 @@ void gamePageGameTipUI() {
 	cout << "※ 다이를 외치는 방법은 베팅 금액을 0을 입력하면 됩니다.";
 	gotoxy(38, 32);
 	cout << "※ 10을 들고 다이를 외치면 패널티 1000000을 잃게 됩니다.";
-	gotoxy(30, 33);
+	gotoxy(38, 33);
 	cout << "※ 화면이 잠시 꺼질때는 숫자를 눌러주면 다시나와요.";
 }
 
 
 void endPageWinnerUI(std::string winnerPlayer)
 {
-	for(int i=0; i<100; i++){
+	for (int i = 0; i < 100; i++) {
 		gotoxy(45, 30);
 		cout << "★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆";
 		gotoxy(53, 31);

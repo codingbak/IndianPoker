@@ -1,12 +1,12 @@
-#include "server.h"
+ï»¿#include "server.h"
 
 #define BUFSIZE 1024
 
 Server::Server() {
 
-	//À©¼Ó »ç¿ë
+	//Ã€Â©Â¼Ã“ Â»Ã§Â¿Ã«
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
-	//¼ÒÄÏ »ç¿ë
+	//Â¼Ã’Ã„Ã Â»Ã§Â¿Ã«
 	hServSock = socket(PF_INET, SOCK_STREAM, 0);
 	// binding
 	servAddr.sin_family = AF_INET;
@@ -18,7 +18,7 @@ Server::Server() {
 	bind(hServSock, (SOCKADDR*)&servAddr, sizeof(servAddr));
 	//listen
 	listen(hServSock, 5);
-	
+
 	clientLen = sizeof(clientAddr);
 	hClientSock = accept(hServSock, (SOCKADDR*)&clientAddr, &clientLen);
 }
@@ -29,7 +29,7 @@ std::string Server::receiveNameClient() {
 	char clientMessage[BUFSIZE] = "";
 
 	strLen = recv(hClientSock, clientMessage, BUFSIZE, 0);
-	
+
 	std::string clientName(clientMessage);
 	return clientName;
 }
@@ -45,7 +45,7 @@ void Server::sendNameClient(std::string serverName) {
 
 void Server::sendCardClient(int cardNumber) {
 	char cardMessage[BUFSIZE] = "";
-	
+
 	std::string cardString = std::to_string(cardNumber);
 
 	std::strcpy(cardMessage, cardString.c_str());
@@ -53,7 +53,7 @@ void Server::sendCardClient(int cardNumber) {
 	send(hClientSock, cardMessage, strlen(cardMessage), 0);
 
 	return;
-	
+
 }
 
 void Server::sendBettingClient(int bettingMoney) {
@@ -75,12 +75,11 @@ int Server::receiveBettingClient() {
 	int strLen = 0;
 	int bettingMoney = 0;
 	char bettingMoneyMessage[BUFSIZE] = "";
-	
+
 	strLen = recv(hClientSock, bettingMoneyMessage, BUFSIZE, 0);
 	std::string bettingMoneyString(bettingMoneyMessage);
 
 	bettingMoney = std::stoi(bettingMoneyString);
-	
+
 	return bettingMoney;
 }
-
