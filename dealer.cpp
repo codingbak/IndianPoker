@@ -118,7 +118,7 @@ void Dealer::BettingStart() {
 			remainingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
 			bettingMoney += rightPlayerBettingMoney - moneyBuffer;
 		}
-		////////////여기서부터 시작 하면 될듯 월요일에
+
 		gamePageInfo.leftPlayerMoney = player[0]->getPlayerMoney();
 		gamePageInfo.rightPlayerMoney = player[1]->getPlayerMoney();
 		gamePageInfo.leftPlayerBettingMoney = leftPlayerBettingMoney;
@@ -222,7 +222,7 @@ void Dealer::ServerBettingStart(Server* server) {
 			remainingMoney = abs(leftPlayerBettingMoney - rightPlayerBettingMoney);
 			bettingMoney += rightPlayerBettingMoney - moneyBuffer;
 		}
-		////////////여기서부터 시작 하면 될듯 월요일에
+
 		gamePageInfo.leftPlayerMoney = player[0]->getPlayerMoney();
 		gamePageInfo.rightPlayerMoney = player[1]->getPlayerMoney();
 		gamePageInfo.leftPlayerBettingMoney = leftPlayerBettingMoney;
