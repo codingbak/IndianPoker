@@ -2,14 +2,18 @@
 #include <string>
 #include <iostream>
 
+
 using namespace std;
 
-class Player
-{
+
+
+class Player {
+
 private:
 	string playerName;
 	int playerMoney;
 	int playerCardNumber;
+
 
 public:
 	Player();
@@ -22,6 +26,8 @@ public:
 
 	int giveBasicBettingMoneyToDealer();
 	int giveBettingMoneyToDealer(int remainingMoney,int enemyPlayerMoney);
+	void giveBettingMoneyToDealer(int bettingMoney);
+
 	int getPlayerMoney();
 	void receiveVictoryMoney(int victoryMoney);
 	int receiveDrawMoney();
