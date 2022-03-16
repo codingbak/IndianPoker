@@ -16,7 +16,7 @@ void Card::shuffleCard() {
 
 	Sleep(950);
 	srand((unsigned int)time(NULL));
-	
+	// ¼ÅÇÃ
 	for (int i = 0; i < 10; i++) {
 		int randomNumber = rand();
 		std::swap(cardNumber[i], cardNumber[(int)randomNumber % 10]);

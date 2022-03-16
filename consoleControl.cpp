@@ -65,6 +65,8 @@ Pointer CursorControl::cursorMove() {
 
 	return pointer;
 }
+
+
 bool CursorControl::cursorClick() {
 
 	if (_kbhit()) {

@@ -4,9 +4,9 @@
 
 Server::Server() {
 
-	//À©¼Ó »ç¿ë
+
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
-	//¼ÒÄÏ »ç¿ë
+
 	hServSock = socket(PF_INET, SOCK_STREAM, 0);
 	// binding
 	servAddr.sin_family = AF_INET;

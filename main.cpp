@@ -6,8 +6,9 @@
 
 using namespace std;
 
-// 리팩토링 시작
+
 int main() {
+
 	consoleSize();
 	consoleName();
 	

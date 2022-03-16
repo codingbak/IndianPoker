@@ -4,7 +4,6 @@
 #define BASIC_BET 100000
 #define PENALTY_BET 1000000
 
-//player°´Ã¤
 
 Player::Player() {
 }

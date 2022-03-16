@@ -48,6 +48,7 @@ void Board::openMenuPage() {
 		Pointer newPointer = menuCursor.cursorMove();
 		bool checkNextPage = menuCursor.cursorClick();
 
+		//포인터 위치 확인 
 		if (newPointer.y != nowPointer.y) {
 			gotoxy(newPointer);
 			cout << "▶";
@@ -87,7 +88,7 @@ void Board::openCommunicationsPage() {
 
 		Pointer newPointer = menuCursor.cursorMove();
 		bool checkNextPage = menuCursor.cursorClick();
-
+		// 포인터 위치 확인
 		if (newPointer.y != nowPointer.y) {
 
 			gotoxy(newPointer);
@@ -130,7 +131,7 @@ void Board::openWriteNamePage() {
 
 	Pointer nowPointer = { 68,22 };
 	string playerName;
-
+	//싱글, 서버, 클라이언트에 따라서 이름 턴제 입력
 	if (communicaionsState == Communications::SINGLE) {
 		namePageUI();
 
@@ -180,12 +181,13 @@ void Board::openStartGamePage() {
 
 
 	if (communicaionsState == Communications::SINGLE) {
-
+		//10번의 게임 진행
 		for (int i = 0; i < 10; i++) {
 			dealer.giveCardToPlayer();
 			dealer.receiveToBettingMoney();
 			dealer.BettingStart();
 			winnerCheck = dealer.turnCheck();
+			// 중간에 승자 나올 경우
 			if (winnerCheck == false) {
 				break;
 			}
