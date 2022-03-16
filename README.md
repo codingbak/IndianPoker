@@ -20,5 +20,4 @@ c++, tcp/ip 교육을 위한 indian Poker 게임
 * 10을 가진 플레이어가 포기하면 패널티를 얻게 된다.
 * 플레이어 자산이 기본 베팅 금액 보다 적어지면 게임을 종료한다.
 # 클래스 다이어그램
-![image](https://user-images.githubusercontent.com/22064581/157170516-9c16184c-abdc-4f86-a550-e4398ae7e118.png)
-
+![Untitled](https://user-images.githubusercontent.com/22064581/158502780-970375c9-3d10-4a43-a665-c9d0b0dd08d6.jpg)
