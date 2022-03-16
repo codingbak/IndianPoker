@@ -33,11 +33,11 @@ c++, tcp/ip 교육을 위한 indian Poker 게임
 
 * **gameStartPage**
 ![image](https://user-images.githubusercontent.com/22064581/158515799-d7ceb917-c6da-4ff7-a716-e19e8d1c4c5b.png)
-<leftPlayer>
+leftPlayer
 ![image](https://user-images.githubusercontent.com/22064581/158515811-b20e2917-cb8b-4799-ade3-50e674ec73ba.png)
-<rightPlayer>
+rightPlayer
 ![image](https://user-images.githubusercontent.com/22064581/158515846-c2fb49d6-2568-465a-9784-1638e71c3917.png)
-<setEnd>
+setEnd
 
 * **gameEndPage**
 ![image](https://user-images.githubusercontent.com/22064581/158515856-abeb23d6-d7ec-4e63-a67d-40eea2ca6431.png)
